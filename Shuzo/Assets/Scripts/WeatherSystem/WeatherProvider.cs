@@ -11,17 +11,22 @@ namespace Assets.Scripts.WeatherSystem
         private void Awake()
         {
             Weather = new ReactiveProperty<WeatherEnum>(StartWeather);
-            var ownWeatherable = GetComponent<IWeatherable>();
-            if (ownWeatherable != null)
-            {
-                Weather.Subscribe(weather => OnWeatherable(ownWeatherable, weather));
-            }
+            Weather.Subscribe(weather => OnOwnWeatherChange(GetComponent<IWeatherable>(), weather));
         }
         private void OnTriggerEnter(Collider other)
         {
-            OnWeatherable(other.GetComponent<IWeatherable>(), Weather.Value);
+            OnOtherProvideWeatherChange(other);
         }
-        private void OnWeatherable(IWeatherable weatherable, WeatherEnum weather)
+        private void OnOtherProvideWeatherChange(Collider other)
+        {
+            if (other.GetComponent<WeatherProvider>() != null) return;
+            OnWeatherChange(other.GetComponent<IWeatherable>(), Weather.Value);
+        }
+        private void OnOwnWeatherChange(IWeatherable weatherable, WeatherEnum ownWeather)
+        {
+            OnWeatherChange(weatherable, ownWeather);
+        }
+        private void OnWeatherChange(IWeatherable weatherable, WeatherEnum weather)
         {
             if (weatherable == null) return;
             switch (weather)
