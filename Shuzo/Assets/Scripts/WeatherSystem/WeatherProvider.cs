@@ -48,5 +48,9 @@ namespace Assets.Scripts.WeatherSystem
                     break;
             }
         }
+        public enum WeatherEnum
+        {
+            Sunny, Rainy, Thunder, Sonwy
+        }
     }
 }
