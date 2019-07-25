@@ -3,21 +3,21 @@ namespace Assets.Scripts.WeatherSystem.Sample
 {
     public class WeatherableObjectSample : WeatherableMonoBehavior
     {
-        public override void OnSunny()
+        protected override void OnSunny()
         {
-            Debug.Log("周りが晴れになった");
+            Debug.Log("周りは晴れ");
         }
-        public override void OnRainy()
+        protected override void OnRainy()
         {
-            Debug.Log("周りが雨になった");
+            Debug.Log("周りは雨");
         }
-        public override void OnThunder()
+        protected override void OnThunder()
         {
-            Debug.Log("周りが雷になった");
+            Debug.Log("周りは雷");
         }
-        public override void OnSnowy()
+        protected override void OnSnowy()
         {
-            Debug.Log("周りが雪になった");
+            Debug.Log("周りは雪");
         }
     }
 }

@@ -3,21 +3,29 @@ namespace Assets.Scripts.WeatherSystem.Sample
 {
     public class WeatherPlayerSample : WeatherableMonoBehavior
     {
-        public override void OnSunny()
+        protected override void OnSunny()
         {
             Debug.Log("Playerが晴れになった");
         }
-        public override void OnRainy()
+        protected override void OnRainy()
         {
             Debug.Log("Playerが雨になった");
         }
-        public override void OnThunder()
+        protected override void OnThunder()
         {
             Debug.Log("Playerが雷になった");
         }
-        public override void OnSnowy()
+        protected override void OnSnowy()
         {
             Debug.Log("Playerが雪になった");
+        }
+        public void GotoLeft()
+        {
+            transform.Translate(Vector3.left * Time.deltaTime);
+        }
+        public void GotoRight()
+        {
+            transform.Translate(Vector3.right * Time.deltaTime);
         }
     }
 }

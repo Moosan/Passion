@@ -7,50 +7,16 @@ namespace Assets.Scripts.WeatherSystem
     {
         public ReactiveProperty<WeatherEnum> Weather { get; private set; }
         [SerializeField]
+#pragma warning disable IDE0044 // 読み取り専用修飾子を追加します
         private WeatherEnum StartWeather = WeatherEnum.Sunny;
+#pragma warning restore IDE0044 // 読み取り専用修飾子を追加します
         private void Awake()
         {
             Weather = new ReactiveProperty<WeatherEnum>(StartWeather);
-            Weather.Subscribe(weather => OnOwnWeatherProvide(GetComponent<IWeatherable>(), weather));
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            OnOtherWeatherProvide(other);
-        }
-        //他の何かに天気を提供するとき
-        private void OnOtherWeatherProvide(Collider other)
-        {
-            if (other.GetComponent<WeatherProvider>() != null) return;
-            OnWeatherProvide(other.GetComponent<IWeatherable>(), Weather.Value);
-        }
-        //自分に天気を提供するとき
-        private void OnOwnWeatherProvide(IWeatherable weatherable, WeatherEnum ownWeather)
-        {
-            OnWeatherProvide(weatherable, ownWeather);
-        }
-        //天気を提供する
-        private void OnWeatherProvide(IWeatherable weatherable, WeatherEnum weather)
-        {
-            if (weatherable == null) return;
-            switch (weather)
-            {
-                case WeatherEnum.Sunny:
-                    weatherable.OnSunny();
-                    break;
-                case WeatherEnum.Rainy:
-                    weatherable.OnRainy();
-                    break;
-                case WeatherEnum.Thunder:
-                    weatherable.OnThunder();
-                    break;
-                case WeatherEnum.Sonwy:
-                    weatherable.OnSnowy();
-                    break;
-            }
-        }
-        public enum WeatherEnum
-        {
-            Sunny, Rainy, Thunder, Sonwy
-        }
+    }
+    public enum WeatherEnum
+    {
+        Sunny, Rainy, Thunder, Sonwy, None
     }
 }
