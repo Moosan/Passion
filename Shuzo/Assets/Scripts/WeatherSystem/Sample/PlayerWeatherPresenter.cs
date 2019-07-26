@@ -43,7 +43,12 @@ namespace Assets.Scripts.WeatherSystem.Sample
                 })
                 .AddTo(gameObject);
 
-
+            //RepeatUntilDestroyを使うと
+            //Destroy時にOnCompleteを発行して
+            //まだオブザーバー生成されてなかったら(再生時に一度もボタンに触れなかったら)
+            //Instanceしちゃうっぽくてくそいので
+            //RepeatUntilDisableを使ってるけど
+            //リークしてないか心配ではある(一応使用的にはDestroyの前にDisableの処理を完了させてるっぽいのでたぶん大丈夫)
             Left.OnPointerDownAsObservable()
                 .SelectMany(_ => gameObject.UpdateAsObservable())
                 .TakeUntil(Left.OnPointerUpAsObservable())
@@ -55,6 +60,15 @@ namespace Assets.Scripts.WeatherSystem.Sample
                 .TakeUntil(Right.OnPointerUpAsObservable())
                 .RepeatUntilDestroy(gameObject)
                 .Subscribe(_ => Player.GotoRight());
+        }
+
+        private void OnDisable()
+        {
+            Debug.Log("Disable");
+        }
+        private void OnDestroy()
+        {
+            Debug.Log("Destroy");
         }
     }
 }

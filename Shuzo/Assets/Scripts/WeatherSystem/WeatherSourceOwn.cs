@@ -5,7 +5,7 @@ namespace Assets.Scripts.WeatherSystem
 {
     public class WeatherSourceOwn : MonoBehaviour, IWeatherSource
     {
-        private readonly Subject<WeatherEnum> WeatherSubject = new Subject<WeatherEnum>();
+        private readonly BehaviorSubject<WeatherEnum> WeatherSubject = new BehaviorSubject<WeatherEnum>(WeatherEnum.None);
         public IObservable<WeatherEnum> OnWeatherObservable()
         {
             return WeatherSubject;
