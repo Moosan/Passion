@@ -15,8 +15,4 @@ namespace Assets.Scripts.WeatherSystem
             Weather = new ReactiveProperty<WeatherEnum>(StartWeather);
         }
     }
-    public enum WeatherEnum
-    {
-        Sunny, Rainy, Thunder, Sonwy, None
-    }
 }

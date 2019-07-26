@@ -16,7 +16,7 @@ namespace Assets.Scripts.WeatherSystem
 
         private readonly List<IReadOnlyReactiveProperty<WeatherEnum>> CollisionWeatherList = new List<IReadOnlyReactiveProperty<WeatherEnum>>();
         private IReadOnlyReactiveProperty<WeatherEnum> DefaultWeather;
-        private readonly Subject<WeatherEnum> WeatherSubject = new Subject<WeatherEnum>();
+        private readonly BehaviorSubject<WeatherEnum> WeatherSubject = new BehaviorSubject<WeatherEnum>(WeatherEnum.None);
         private WeatherEnum GetWeather
         {
             get
