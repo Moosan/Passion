@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04dd136808f19444900ceadf8be6b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartWeather: 0
+  StartWeather: 1
 --- !u!65 &680878212
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04dd136808f19444900ceadf8be6b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartWeather: 1
+  StartWeather: 2
 --- !u!1 &1565955790
 GameObject:
   m_ObjectHideFlags: 0
