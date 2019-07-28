@@ -10,23 +10,25 @@ namespace Assets.Scripts.WeatherSystem.Sample
         public Button RainyButton;
         public Button Left;
         public Button Right;
-        public WeatherProvider provider;
         public WeatherPlayerSample Player;
         private void Start()
         {
+            if (Player == null) return;
+            var provider = Player.GetComponent<IWeatherProvider>();
+            if (provider == null) return;
             SunnyButton.OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    provider.Weather.Value = WeatherEnum.Sunny;
+                    provider.WeatherProperty().Value = WeatherEnum.Sunny;
                 })
                 .AddTo(gameObject);
             RainyButton.OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    provider.Weather.Value = WeatherEnum.Rainy;
+                    provider.WeatherProperty().Value = WeatherEnum.Rainy;
                 })
                 .AddTo(gameObject);
-            provider.Weather
+            provider.WeatherProperty()
                 .Subscribe(weather =>
                 {
                     switch (weather)

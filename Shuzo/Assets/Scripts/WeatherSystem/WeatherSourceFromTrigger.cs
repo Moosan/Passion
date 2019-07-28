@@ -32,10 +32,10 @@ namespace Assets.Scripts.WeatherSystem
         }
         private void OnTriggerEnter(Collider other)
         {
-            var provider = other.GetComponent<WeatherProvider>();
+            var provider = other.GetComponent<IWeatherProvider>();
             if (provider != null)
             {
-                CollisionWeatherList.Add(provider.Weather);
+                CollisionWeatherList.Add(provider.WeatherProperty());
             }
         }
         private void OnTriggerExit(Collider other)
@@ -43,7 +43,7 @@ namespace Assets.Scripts.WeatherSystem
             var provider = other.GetComponent<WeatherProvider>();
             if (provider != null)
             {
-                CollisionWeatherList.Remove(provider.Weather);
+                CollisionWeatherList.Remove(provider.WeatherProperty());
             }
         }
     }
