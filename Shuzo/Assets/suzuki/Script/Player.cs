@@ -6,10 +6,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private Rigidbody rb;
-    public float jump;
     public float speed;
-
-
+       
     // Start is called before the first frame update
     void Start()
     {
@@ -20,35 +18,55 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        
-
         //速度を制限してる
-        if ((rb.velocity.x) > speed)
-        {
-            rb.velocity = Vector3.right * speed + Vector3.up * rb.velocity[1] + Vector3.forward * rb.velocity[2];
-        }
-        if ((rb.velocity.x) < -speed)
-        {
-            rb.velocity = Vector3.right * -speed + Vector3.up * rb.velocity[1] + Vector3.forward * rb.velocity[2];
-        }
-
-    }
-
-    void FixedUpdate()
-    {
+        SpeedLimit(speed);
 
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddForce(transform.right * 6);
+            Move(15);
         }
 
 
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(transform.right * -6);
+            Move(-15);
         }
 
     }
 
+
+    public void Move(int power)
+    {
+        rb.AddForce(transform.right * power);
+    }
+
+    public void Angular()
+    {
+        
+
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Vector3 normal = Vector3.zero;
+
+        //HN待ち
+
+
+        
+            
+    }
+
+    public void SpeedLimit(float limit)
+    {
+        if ((rb.velocity.x) > limit)
+        {
+            rb.velocity = Vector3.right * limit + Vector3.up * rb.velocity[1] + Vector3.forward * rb.velocity[2];
+        }
+        if ((rb.velocity.x) < -limit)
+        {
+            rb.velocity = Vector3.right * -limit + Vector3.up * rb.velocity[1] + Vector3.forward * rb.velocity[2];
+        }
+    }
 
 }
